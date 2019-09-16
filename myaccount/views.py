@@ -42,7 +42,7 @@ def signup(request):
                     password=request.POST['password']
                 ) # 유효성 검사가 완료 된 정상적인 데이터로 유저를 생성
                 auth_login(request, new_user, backend='django.contrib.auth.backends.ModelBackend')
-                return redirect('myaccount:index')
+                return redirect('polls:index')
             else:
                 return render(request, 'myaccount/signup.html', {'form': form, 'error': '이미 존재하는 아이디입니다.'})
         else:
