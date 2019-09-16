@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul class="list-group">
+        <li class="list-group-item">
+            <b><strong>{{ question.question_text }}</strong></b> {# 질문 목록 #}
+            <br>
+            {% if error_message %}<strong style="color:red">{{ error_message }}</strong>{% endif %}
+        </li>
+        <form action="{% url 'polls:vote' question.id %}" method="post"> {# vote로 보내는 form #}
+            {% csrf_token %}
+            {% for choice in question.choice_set.all %}
+                <li class="list-group-item"> {# 질문지 선택시 사용되는 radio button #}
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="form-check-input" id="materialUnchecked" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
+                        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br/>
+                    </div>
+                </li>
+            {% endfor %}
+            {% if user.is_authenticated %}
+                <button type="submit" style="margin: 5px 0 0 40px;" name="vote_submit" class="btn btn-primary">Vote
+                </button>
+                </form> {# vote로 보내는 form #}
+                <form action="{% url 'polls:delete' question.id %}" method="POST"> {# Delete로 보내는 form #}
+                {% csrf_token %}
+                <button type="submit" style="margin: 5px 0 0 40px;" name="delete_submit" class="btn btn-danger">Delete
+                </button>
+            {% endif %}
+            </form>
+    </ul>
+{% endblock %}

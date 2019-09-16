@@ -1,0 +1,151 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/js/mdb.min.js"></script>
+    <style>
+        span {
+            margin-left: 10px;
+        }
+    </style>
+    <title>{% block title %}Polls{% endblock %}</title>
+</head>
+<body>
+<div class="jumbotron text-center" style="background-color: #3596F3; color:white">
+    <h1><a href="/" style="color:white">인기투표 페이지</a></h1>
+    <p style="font-style: oblique">당신의 선택은?</p>
+</div>
+<div class="btn-group" style="margin-bottom:30px; margin-left:20px;">
+    {% if user.is_authenticated %}
+        <button type="button" class="btn btn-primary">
+            <a href="{% url 'polls:create' %}" style="color:white">Question Create</a>
+        </button>
+    {% else %}
+        <button type="button" class="btn btn-primary"><a href="/" style="color:white"
+                                                         onclick="alert('로그인 후 이용 가능합니다.')">Question Create</a>
+        </button>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <button type="button" class="btn btn-primary"><a href="{% url 'polls:create_choice' %}" style="color:white">Choice
+            Create</a></button>
+    {% else %}
+        <button type="button" class="btn btn-primary"><a href="/" style="color:white"
+                                                         onclick="alert('로그인 후 이용 가능합니다.')">Choice
+            Create</a></button>
+    {% endif %}
+    <button type="button" class="btn btn-primary"><a href="{% url 'polls:comment' %}" style="color:white">Comment</a>
+    </button>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Accounts
+        </button>
+        <div class="dropdown-menu">
+            {% if user.is_authenticated %}
+                <a class="dropdown-item" href="{% url 'myaccount:logout' %}" onclick="alert('로그아웃 되었습니다')">Logout</a>
+            {% else %}
+                <a class="dropdown-item" href="{% url 'myaccount:login' %}">Login</a>
+                <a class="dropdown-item" href="{% url 'myaccount:signup' %}">Signup</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% for account in user.socialaccount_set.all %}
+    <p style="float:right; font-style:oblique; margin-right:20px; font-weight:bold">{{ account.provider }}로 {{ account.extra_data.name }}님이
+        로그인 중 입니다.</p>
+{% empty %}
+    {% if user.is_authenticated %}
+        <span style="float:right; font-style:oblique; margin-right:20px; font-weight:bold">{{ user.username }}님이 로그인 중
+            입니다.</span>
+    {% endif %}
+{% endfor %}
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+    <!-- Footer -->
+    <footer class="page-footer font-small blue pt-4">
+
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <!-- Content -->
+                    <h5 class="text-uppercase">2044smile</h5>
+                    <p>Thank you for coming to my site</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Contact</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="https://newbiecs.tistory.com/" target="_blank">Blog</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/2044smile" target="_blank">Github</a>
+                        </li>
+                        <li>
+                            <a href="#!">Email - 2044smile@naver.com</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+{% endblock %}
+</body>
+</html>

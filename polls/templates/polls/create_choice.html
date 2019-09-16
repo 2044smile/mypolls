@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form class="text-center border border-light p-5" action="" method="post">
+        {% csrf_token %}
+        <p class="h4 mb-4">Choice Create</p>
+
+        <select name="question" required="" id="id_question" class="browser-default custom-select mb-4">
+            <option value="" selected="" disabled>Choose question</option>
+            {% for qq in q %}
+                <option value="{{ qq.id }}">{{ qq.question_text }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Question Category"
+               required_id="id_choice_title" name="choice_title">
+        <input type="text" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Content"
+               name="choice_text">
+        <button class="btn btn-info btn-block my-4" type="submit">Save</button>
+    </form>
+{% endblock %}
+{#{% load crispy_forms_tags %}#}
+{#{% block content %}#}
+{#<div class="container">#}
+{#    <div class="card">#}
+{#        <div class="card-header">#}
+{#            Create Choice_text#}
+{#        </div>#}
+{#        <div class="card-body">#}
+{#             {% crispy form %}#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#{% endblock content %}#}
+
+

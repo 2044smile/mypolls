@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load socialaccount %} {# 까먹지 말고 적어주자 #}
+
+
+
+{% block content %}
+    {% for i in question_list %}
+        <ul class="list-group">
+            <li class="list-group-item">{{ forloop.counter0|add:question_list.start_index }}번 째 투표 :
+                <a href={% url 'polls:detail' pk=i.id %}>{{ i.question_title }}</a>
+                <p style="font-style:oblique;">작성자 : {{ i.author }}
+                <p style="float:right">등록일자 : {{ i.pub_date }}</p></li>
+        </ul>
+    {% endfor %}
+    {# 페이징 기능 #}
+    <nav aria-label="">
+    <b>
+        <ul class="pagination justify-content-center" id="pageNum" style="margin-top: 15px">
+            {% if  question_list.has_previous %} {# 이전 페이지가 있다면 active #}
+                <li class="page-item active">
+                    <a class="page-link" href="?page={{ question_list.previous_page_range }}" tabindex="-1">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"> {# 이전 페이지가 없다면 First Page 출력하고 disabled #}
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+            {% endif %}
+            {% for cnt in question_list.paginator.page_range %} {# 페이지 번호 #}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ cnt }}">{{ cnt }}</a>
+                </li>
+            {% endfor %}
+            {% if question_list.has_next %} {# 다음 페이지가 있다면 #}
+                <li class="page-item active">
+                    <a class="page-link" href="?page={{ question_list.next_page_number }}">Next</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"> {# 다음페이지가 없다면 disabled #}
+                    <a class="page-link disable" href="">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </b>
+    </nav>
+    {# 페이징 기능 #}
+{% endblock %}

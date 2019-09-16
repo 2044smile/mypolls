@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <li class="list-group-item">
+        <strong style="color:red">{{ q.question_text }} 을(를) 삭제하시겠습니까?</strong>
+        <br>
+        {% if error %}
+            <strong style="color:red">본인이 작성한 글만 삭제할 수 있습니다.</strong>
+            </li>
+        {% endif %}
+    <div class="button" style="margin: 5px 0 0 40px"></div>
+    <form action="" method="POST" style="margin: 5px 0 0 35px">
+        {% csrf_token %}
+        {% if error %}
+            <button type="submit" onclick="alert('본인이 작성한 글만 삭제할 수 있습니다.')" class="btn btn-primary">예</button>
+        {% endif %}
+    </form>
+    <button type="button" onclick="location.href='/'" style="margin: 5px 0 20px 40px" class="btn btn-danger">아니오</button>
+
+{% endblock %}
