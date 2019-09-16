@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a05118d4-3970-4798-8ac9-20ab55aee166" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myaccount/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myaccount/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +129,7 @@
       <workItem from="1568341031408" duration="10589000" />
       <workItem from="1568609348807" duration="3234000" />
       <workItem from="1568613183040" duration="239000" />
-      <workItem from="1568613983527" duration="62000" />
+      <workItem from="1568613983527" duration="1565000" />
     </task>
     <task id="LOCAL-00001" summary="질문지를 선택하면 질문지에 맞는 선택지가 나오게 구현">
       <created>1566744696601</created>
